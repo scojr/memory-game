@@ -4,7 +4,7 @@ import "../styles/Card.css"
 
 
 
-export default function Cards({ num }) {
+export default function Cards({ num, onCardClick }) {
   const [data, setData] = useState(null);
   const url = (() => `https://dog.ceo/api/breeds/image/random/${num}`)();
 
@@ -21,13 +21,11 @@ export default function Cards({ num }) {
       ignore = true;
     };
   }, [url])
-  console.log(data);
-
 
   const getImages = () => {
     if (data) {
       const images = [];
-      const image = (num) => <img className="card" key={num} src={data.message[num]} height="300" width="300" />
+      const image = (num) => <img className="card" key={num} src={data.message[num]} onClick={() => onCardClick(num)} height="300" width="300" />
       for (let i = 0; i < num; i++) {
         images.push(image(i));
       }
