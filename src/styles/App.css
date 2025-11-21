@@ -1,6 +1,54 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+}
+
+.app {
+  min-height: calc(100vh - 4rem);
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+header,
+footer {
+  position: relative;
+  color: white;
+  align-self: first baseline;
+  top: 10vh;
+}
+
+footer {
+  align-self: start;
+
+  h1 {
+    font-size: 2rem;
+
+    span {
+      font-size: 3rem;
+    }
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+header {
+
+  h1 {
+    font-size: 3rem;
+  }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../styles/Card.css"
+import "../styles/Cards.css"
 
 
 
