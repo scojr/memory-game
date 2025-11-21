@@ -4,7 +4,7 @@ import "../styles/Card.css"
 
 
 
-export default function Cards({ num, onCardClick }) {
+export default function Cards({ num, onCardClick, order }) {
   const [data, setData] = useState(null);
   const url = (() => `https://dog.ceo/api/breeds/image/random/${num}`)();
 
@@ -25,7 +25,7 @@ export default function Cards({ num, onCardClick }) {
   const getImages = () => {
     if (data) {
       const images = [];
-      const image = (num) => <img className="card" key={num} src={data.message[num]} onClick={() => onCardClick(num)} height="300" width="300" />
+      const image = (num) => <img className="card" key={num} src={data.message[num]} style={{ order: order[num] }} onClick={() => onCardClick(num)} height="300" width="300" />
       for (let i = 0; i < num; i++) {
         images.push(image(i));
       }

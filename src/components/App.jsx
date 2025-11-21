@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Cards from './Card';
+import Cards from './Cards';
 import '../styles/App.css'
 
 
@@ -8,9 +8,19 @@ function App() {
   const [score, setScore] = useState(0);
   const [highscore, setHighscore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
+  const [cardsOrder, setCardsOrder] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 
+  const shuffleOrder = (array) => {
+    const clonedArray = array.slice();
+    for (let i = clonedArray.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [clonedArray[i], clonedArray[j]] = [clonedArray[j], clonedArray[i]];
+    }
+    return clonedArray;
+  }
 
   const onCardClick = (id) => {
+    setCardsOrder(shuffleOrder(cardsOrder));
     console.log(clickedCards);
     const cardId = id;
     if (!clickedCards.includes(cardId)) {
@@ -21,7 +31,7 @@ function App() {
     }
   }
 
-  const getCards = () => (<Cards num={9} onCardClick={onCardClick}></Cards>)
+  const getCards = () => (<Cards num={9} onCardClick={onCardClick} order={cardsOrder}></Cards>)
 
   let cards = getCards();
 
