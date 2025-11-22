@@ -9,6 +9,7 @@ function App() {
   const [highscore, setHighscore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [cardsOrder, setCardsOrder] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  const [animation, setAnimation] = useState("grow 0.2s 1");
 
   const shuffleOrder = (array) => {
     const clonedArray = array.slice();
@@ -20,7 +21,7 @@ function App() {
   }
 
   const onCardClick = (id) => {
-    setCardsOrder(shuffleOrder(cardsOrder));
+    setAnimation("shrink 0.2s 1");
     console.log(clickedCards);
     const cardId = id;
     if (!clickedCards.includes(cardId)) {
@@ -31,7 +32,17 @@ function App() {
     }
   }
 
-  const getCards = () => (<Cards num={9} onCardClick={onCardClick} order={cardsOrder}></Cards>)
+  const onAnimationEnd = (event) => {
+    if (event.animationName === "shrink") {
+      setCardsOrder(shuffleOrder(cardsOrder));
+      setAnimation("grow 0.2s 1")
+    }
+    if (event.animationName === "grow") {
+      setAnimation(null)
+    }
+  }
+
+  const getCards = () => (<Cards num={9} onCardClick={onCardClick} order={cardsOrder} animation={animation} onAnimationEnd={onAnimationEnd}></Cards>)
 
   let cards = getCards();
 
