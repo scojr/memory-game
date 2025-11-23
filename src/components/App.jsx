@@ -3,13 +3,13 @@ import { useState } from "react";
 import Cards from './Cards';
 import '../styles/App.css'
 
-
 function App() {
   const [score, setScore] = useState(0);
   const [highscore, setHighscore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [cardsOrder, setCardsOrder] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [animation, setAnimation] = useState("grow");
+  const [scoreAnimation, setScoreAnimation] = useState(null);
 
   const shuffleOrder = (array) => {
     const clonedArray = array.slice();
@@ -22,7 +22,6 @@ function App() {
 
   const onCardClick = (id) => {
     setAnimation("shrink");
-    console.log(clickedCards);
     const cardId = id;
     if (!clickedCards.includes(cardId)) {
       setClickedCards([...clickedCards, cardId]);
@@ -41,6 +40,9 @@ function App() {
     if (event.animationName === "grow") {
       setAnimation(null);
     }
+    if (event.animationName === "score" || event.animationName === "shake") {
+      setScoreAnimation(null);
+    }
   }
 
   const getCards = () => (<Cards num={9} onCardClick={onCardClick} order={cardsOrder} animation={animation} onCardAnimationEnd={onAnimationEnd}></Cards>)
@@ -48,12 +50,14 @@ function App() {
   let cards = getCards();
 
   const addToScore = () => {
+    setScoreAnimation("score");
     const newScore = score + 1;
     setScore(newScore);
     if (newScore > highscore) setHighscore(newScore);
   }
 
   const resetGame = () => {
+    setScoreAnimation("shake");
     setScore(0);
     setClickedCards([]);
   }
@@ -66,8 +70,8 @@ function App() {
       </header>
       {cards}
       <footer>
-        <h1>Score: <span>{score}</span></h1>
-        <h2>Highscore: <span>{highscore}</span></h2>
+        <h1 className={scoreAnimation} onAnimationEnd={(event) => onAnimationEnd(event)}>Score: <span>{score}</span></h1>
+        <h2 >Highscore: <span>{highscore}</span></h2>
       </footer>
     </div>
   )

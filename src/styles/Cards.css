@@ -72,5 +72,5 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
-  height: 100%;
+  max-height: calc(100vh - 2rem);
 }
