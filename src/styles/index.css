@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 
 :root {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   font-family: pangolin;
   line-height: 1.5;
   font-size: 20px;
@@ -10,5 +9,6 @@
 }
 
 body {
-  background-color: #004f0f;
+  background-color: #015a12;
+  background-image: linear-gradient(#015a12 40%, #012c0aa6);
 }
