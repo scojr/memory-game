@@ -10,6 +10,7 @@ function App() {
   const [cardsOrder, setCardsOrder] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [animation, setAnimation] = useState("grow");
   const [scoreAnimation, setScoreAnimation] = useState(null);
+  const [message, setMessage] = useState(null);
   const [refreshTrigger, setRefreshTrigger] = useState(0)
   const [data, setData] = useState(null);
 
@@ -44,6 +45,9 @@ function App() {
     if (event.animationName === "score" || event.animationName === "shake") {
       setScoreAnimation(null);
     }
+    if (event.animationName === "spin") {
+      setMessage(null);
+    }
   }
 
   const getCards = () => (<Cards num={9} data={data} refreshTrigger={refreshTrigger} setData={setData} onCardClick={onCardClick} order={cardsOrder} animation={animation} onCardAnimationEnd={onAnimationEnd}></Cards>)
@@ -67,6 +71,7 @@ function App() {
   const newImages = () => {
     setClickedCards([]);
     setRefreshTrigger(prev => prev + 1)
+    setMessage('perfect')
   }
 
   return (
@@ -75,6 +80,7 @@ function App() {
         <h1>Memory Game</h1>
         <p>Click each image once to win!</p>
       </header>
+      <div className={"message" + " " + message} onAnimationEnd={(event) => onAnimationEnd(event)}></div>
       {cards}
       <footer>
         <h1 className={scoreAnimation} onAnimationEnd={(event) => onAnimationEnd(event)}>Score: <span>{score}</span></h1>

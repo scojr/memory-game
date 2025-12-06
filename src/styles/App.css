@@ -18,6 +18,7 @@
 }
 
 .app {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr max-content 1fr;
   place-items: center;
@@ -59,6 +60,24 @@ header {
 
 footer h1.shake {
   animation: shake linear 0.2s 1;
+}
+
+.message {
+  position: absolute;
+}
+
+.message.perfect::after {
+  color: rgb(255, 255, 255);
+  font-size: 10em;
+  z-index: 99;
+  position: absolute;
+  content: "Perfect!";
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  text-shadow: 3px 3px 3px black, -3px 3px 3px black, -3px 3px 3px black, 3px -3px 3px black;
+  animation: spin ease-in-out .4s 1;
+  animation-fill-mode: forwards;
 }
 
 footer h1.score::after {
@@ -108,5 +127,27 @@ footer h1.score::after {
 
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    scale: 0;
+    transform: rotate(0deg);
+  }
+
+  50% {
+    scale: 1;
+    transform: rotate(360deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(360deg);
   }
 }
