@@ -78,7 +78,8 @@ function App() {
     <div className="app">
       <header>
         <h1>Memory Game</h1>
-        <p>Click each image once to win!</p>
+        <p>Click each image to increase your score.</p>
+        <p>Don't click the same image twice!</p>
       </header>
       <div className={"message" + " " + message} onAnimationEnd={(event) => onAnimationEnd(event)}></div>
       {cards}
