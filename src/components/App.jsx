@@ -10,6 +10,8 @@ function App() {
   const [cardsOrder, setCardsOrder] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [animation, setAnimation] = useState("grow");
   const [scoreAnimation, setScoreAnimation] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0)
+  const [data, setData] = useState(null);
 
   const shuffleOrder = (array) => {
     const clonedArray = array.slice();
@@ -32,7 +34,6 @@ function App() {
   }
 
   const onAnimationEnd = (event) => {
-    console.log(event.animationName)
     if (event.animationName === "shrink") {
       setCardsOrder(shuffleOrder(cardsOrder));
       setAnimation("grow");
@@ -45,7 +46,7 @@ function App() {
     }
   }
 
-  const getCards = () => (<Cards num={9} onCardClick={onCardClick} order={cardsOrder} animation={animation} onCardAnimationEnd={onAnimationEnd}></Cards>)
+  const getCards = () => (<Cards num={9} data={data} refreshTrigger={refreshTrigger} setData={setData} onCardClick={onCardClick} order={cardsOrder} animation={animation} onCardAnimationEnd={onAnimationEnd}></Cards>)
 
   let cards = getCards();
 
@@ -53,6 +54,7 @@ function App() {
     setScoreAnimation("score");
     const newScore = score + 1;
     setScore(newScore);
+    if (newScore % 9 === 0) newImages();
     if (newScore > highscore) setHighscore(newScore);
   }
 
@@ -60,6 +62,11 @@ function App() {
     setScoreAnimation("shake");
     setScore(0);
     setClickedCards([]);
+  }
+
+  const newImages = () => {
+    setClickedCards([]);
+    setRefreshTrigger(prev => prev + 1)
   }
 
   return (

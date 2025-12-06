@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "../styles/Cards.css"
 
-export default function Cards({ num, onCardClick, order, animation, onCardAnimationEnd }) {
-  const [data, setData] = useState(null);
-  const classes = ["cards", animation]
-  const url = (() => `https://dog.ceo/api/breeds/image/random/${num}`)();
+export default function Cards({ num, data, setData, refreshTrigger, onCardClick, order, animation, onCardAnimationEnd }) {
+  const classes = ["cards", animation];
+  const url = (() => `https://dog.ceo/api/breeds/image/random/${9}`)();
   const images = [];
 
   useEffect(() => {
@@ -19,7 +18,7 @@ export default function Cards({ num, onCardClick, order, animation, onCardAnimat
     return () => {
       ignore = true;
     };
-  }, [url])
+  }, [url, setData, refreshTrigger])
 
   if (data) {
     const image = (num) => <img className="card" key={num} src={data.message[num]} style={{ order: order[num] }} onClick={() => onCardClick(num)} height="300" width="300" onAnimationEnd={onCardAnimationEnd} />
