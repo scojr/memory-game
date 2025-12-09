@@ -111,6 +111,21 @@ footer h1.score::after {
   animation-fill-mode: forwards;
 }
 
+.attribution {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  &:link {
+    color: #07974f;
+  }
+
+  &:visited {
+    color: #035a2f;
+  }
+
+}
+
 @keyframes score {
   0% {
     opacity: 0%;

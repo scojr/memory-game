@@ -87,7 +87,14 @@ function App() {
         <h1 className={scoreAnimation} onAnimationEnd={(event) => onAnimationEnd(event)}>Score: <span>{score}</span></h1>
         <h2 >Highscore: <span>{highscore}</span></h2>
       </footer>
+      <Attribution></Attribution>
     </div>
+  )
+}
+
+function Attribution() {
+  return (
+    <a className="attribution" href="https://dog.ceo/dog-api/">Dog API by Dog CEO</a>
   )
 }
 
