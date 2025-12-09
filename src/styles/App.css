@@ -19,21 +19,34 @@
 
 .app {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr max-content 1fr;
-  place-items: center;
-  height: 100vh;
-  width: 100vw;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: calc(100vw - 1rem);
+  height: calc(100vh - 1rem);
+
+  header,
+  footer,
+  .cards {
+    flex: 1;
+  }
 }
 
 header,
 footer {
   position: relative;
-  translate: 0 50%;
+  translate: 0 100%;
   color: white;
   align-self: first baseline;
   text-shadow: 3px 3px 4px black;
   white-space: nowrap;
+
+  h1,
+  h2,
+  p {
+    width: min-content;
+    margin: 0 auto;
+  }
 }
 
 footer {
@@ -63,28 +76,35 @@ footer h1.shake {
 }
 
 .message {
+  pointer-events: none;
+  width: calc(100vw - 1rem);
+  height: calc(100vh - 1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
 }
 
 .message.perfect::after {
   color: rgb(255, 255, 255);
-  font-size: 10em;
   z-index: 99;
+  font-size: 10em;
   position: absolute;
   content: "Perfect!";
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
   text-shadow: 3px 3px 3px black, -3px 3px 3px black, -3px 3px 3px black, 3px -3px 3px black;
-  animation: spin ease-in-out .4s 1;
+  animation: spin ease-in-out .9s 1;
   animation-fill-mode: forwards;
+}
+
+footer h1.score {
+  position: relative;
 }
 
 footer h1.score::after {
   position: absolute;
   content: "+1";
-  right: 1ch;
-  top: 1ch;
+  right: 0;
+  top: 0;
   color: greenyellow;
   text-shadow: 3px 3px 3px black;
   animation: score ease-in-out .4s 1;

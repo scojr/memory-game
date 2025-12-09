@@ -12,6 +12,10 @@
   animation-fill-mode: forwards;
 }
 
+.cards {
+  height: 100%;
+}
+
 .card:hover {
   animation: wiggle 0.5s infinite;
   animation-timing-function: linear;
